@@ -1,0 +1,95 @@
+{% extends 'master.html' %}
+
+{% block body %}
+
+<style>
+  header {
+    background-color: #ff6f61;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+
+  form {
+    max-width: 600px;
+    margin: 0 auto 60px auto;
+    background: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  form input[type="text"],
+  form textarea,
+  form input[type="file"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    font-family: inherit;
+    resize: vertical;
+  }
+
+  form textarea {
+    min-height: 100px;
+  }
+
+  form input[type="file"] {
+    padding: 6px 14px;
+  }
+
+  form button {
+    background-color: #ff6f61;
+    color: white;
+    padding: 14px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  form button:hover {
+    background-color: #e95a4f;
+  }
+</style>
+
+<header>
+  Add New Recipe
+</header>
+
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label for="title">Title: Name of the recipe</label>
+  <input type="text" id="title" name="title"  placeholder="E.g. Spaghetti Carbonara" required />
+
+  <label for="description">Description: A short overview of the dish</label>
+  <textarea id="description" name="description" placeholder="Describe your dish briefly..." required></textarea>
+
+  <label for="ingredients">Ingredients: Text describing the ingredients</label>
+  <textarea id="ingredients" name="ingredients"  placeholder="List ingredients separated by commas or new lines" required></textarea>
+
+  <label for="instructions">Instructions: Steps to prepare the dish</label>
+  <textarea id="instructions" name="instructions"  placeholder="Describe preparation steps..." required></textarea>
+
+  <label for="image">Image: A photo of the recipe (optional)</label>
+  <input type="file" id="image" name="image"  accept="image/*" />
+
+  <button type="submit">Add Recipe</button>
+</form>
+
+{% endblock body %}

@@ -1,0 +1,132 @@
+{% extends 'master.html' %}
+
+{% block body %}
+
+<style>
+  /* Keep the styles scoped here or move to master.css if you want */
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 40px 0;
+  }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #333;
+  }
+
+  .description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 10px;
+  }
+
+  .ingredients, .instructions {
+    margin: 10px 0;
+  }
+
+  .ingredients strong, .instructions strong {
+    color: #ff6f61;
+  }
+
+  /* Action buttons container */
+  .actions {
+    margin-top: auto; /* push buttons to the bottom */
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    color: white;
+  }
+
+  .btn-view {
+    background-color: #4caf50; /* green */
+  }
+  .btn-view:hover {
+    background-color: #45a049;
+  }
+
+  .btn-edit {
+    background-color: #2196f3; /* blue */
+  }
+  .btn-edit:hover {
+    background-color: #0b7dda;
+  }
+
+  .btn-delete {
+    background-color: #f44336; /* red */
+  }
+  .btn-delete:hover {
+    background-color: #da190b;
+  }
+</style>
+
+<header>
+  My Recipe Manager
+</header>
+<div class="container">
+  <!-- Recipe Card Example -->
+  <div class="card">
+    
+    {% if recipe.Image %}
+    <img src="{{ recipe.Image.url }}" alt="recipe img" />   
+    {% else %}
+       No Image available
+    {% endif %}
+      
+    <div class="card-content">
+      <h2>{{ recipe.Title }}</h2>
+      <p class="description">{{ recipe.Description }}</p>
+     
+
+      <!-- Action Buttons -->
+      <div class="actions">
+        <a class="btn btn-view" href="{% url 'view_recipe' recipe.id %}">View</a>
+        <a class="btn btn-edit" href="{% url 'edit_recipe' recipe.id %}">Edit</a>
+        <a class="btn btn-delete" href="{% url 'delete_recipe' recipe.id %}">Delete</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- More cards can be added here -->
+
+
+</div>
+{% endblock body %}
